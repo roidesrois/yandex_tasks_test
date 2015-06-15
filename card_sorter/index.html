@@ -1,0 +1,43 @@
+<! DOCTYPE HTML>
+<head>
+        <meta charset="utf-8">
+        <title>Сортировщик карточек путешественника</title>
+        <style>
+        button {
+            background: #428BCA;
+            color: #fff;
+            font-size: 20px;
+            float: left;
+            height: 60px;
+            width: 150px;
+            line-height: 60px;
+            margin: 25px 25px;
+            text-align: center;
+            border: 0;
+            transition: all 0.3s ease 0s;
+        }
+        button:hover {
+          box-shadow: inset 0 0 0 5px #3071A9;
+        }
+        .clear{clear: both}
+        #list_of_cards{margin: 0 auto; width: 500px}
+        .sort_item{ 
+            background-color: antiquewhite;
+            border: 2px dotted gray; 
+            padding: 6px 6px; 
+            margin-bottom: 6px;}
+        </style>
+</head>
+<body>
+        <button id="sort" onclick="cardsSorter(travelerCards)">Sort Cards!</button>
+        <div class="clear"></div>
+        <div id="list_of_cards"></div>
+        <!-- 
+        Take flight from Moscow to London. Route number N554. Seat 4A. Gate 22. Baggage drop at ticket counter 344.
+        Take train from London to Paris. Route number 54S. Seat 23.
+        Take flight from Paris to Berlin. Route number SR465. Seat 56. Gate 2A. Baggage will be automatically transferred from your last leg.
+        Take bus from Berlin to Zurich. -->
+        </div>
+        <script type="text/javascript" src="../src/scripts/cards.sorter.js"></script>
+</body>
+</html>
