@@ -1,13 +1,13 @@
 /*=====================================================
 *
-*   _RoiJS : A Mini JavaScript Framework
+*   A Mini JavaScript Framework
 *   (c) Ruslan Salimov 2015
 *
 ======================================================*/
 
-(function(window) {
+(function(window, undefined) {
 
-    function ready(fn) {
+     ready = function(fn) {
       if (document.readyState != 'loading'){
         fn();
       } else {
@@ -15,7 +15,7 @@
       }
     }
 
-    function _(selector) {
+    _ = function(selector) {
         var e = {};
         e.selector = selector;
 
@@ -188,97 +188,9 @@
                 return e.element.parentNode.removeChild(e.element);
             });
         };
+
+        /* Возвращаем объект с методами */
         return e;
     };
 
-    function ArrayMix(a) {
-        var d, c, b = a.length;
-        while (b) {
-            c = Math.floor(Math.random() * b);
-            d = a[--b];
-            a[b] = a[c];
-            a[c] = d
-        }
-        return a;
-    }
-
-    function playGame(array) {
-        var i, generatedColorIndex, numberOfCards = array.length, board = "", res = false;
-
-        generatedColorIndex = Math.floor( Math.random( ) * (numberOfCards) ); // Генерируем целое случайное число от 0 до numberOfCards вкл-но
-        _(".colorName").html(array[generatedColorIndex]);
-        _(".colorName").css("color", array[generatedColorIndex]);
-
-        for (i = 0; i < numberOfCards; i++) {
-            board += "<div class='flipper'>" + 
-                        "<div class='front'>" + 
-                        "</div>" +
-                        "<div class='"+array[i]+" back'>" + 
-                        "</div>" + 
-                     "</div>" + "\n";
-        }
-        _("#board").html(board);
-
-        _(".flipper").on("click", function(){
-            if (_(this).hasClass('opened')) _(this).removeClass('opened');
-            else {
-                _(".flipper").removeClass('opened');
-                _(this).addClass('opened');
-            }
-
-            if (_(this).hasClass('opened')) {
-                if (_(this).children().next().attr("class").split(' ')[0] == array[generatedColorIndex]) {
-                    alertBox.open("Congratulations, you made right choice!");
-                    res = true;
-                }
-                else {
-                    alertBox.open("Unfortunately, you did't make right choice. Try again");
-                }
-            } 
-        });
-
-        _(".close_block").on("click", function() {
-            alertBox.close(res, array);
-        });
-    }
-
-    var alertBox = {
-        container: "",
-        overlay: "",
-          
-        open: function(text) {
-            //set message
-            alertBox.container = _(".alert-box");
-            alertBox.container.toggleClass("hide");
-            alertBox.container.children(1).html(text);
-
-            alertBox.overlay = document.createElement("DIV");
-            alertBox.overlay.className = "overlay";
-            alertBox.overlay.style.width = "100%";
-            alertBox.overlay.style.height = "100%";
-            alertBox.overlay.style.backgroundColor = '#000000';
-            alertBox.overlay.style.top = '0';
-            alertBox.overlay.style.left = '0';
-            alertBox.overlay.style.opacity = '0.6';
-            alertBox.overlay.style.position = 'absolute';
-            alertBox.overlay.style.zIndex = '9999';
-            
-            document.body.appendChild(alertBox.overlay);
-        },
-        
-        close: function(result, cards) {
-            alertBox.container.parent().toggleClass("hide");
-            alertBox.overlay.remove();
-            if (result) playGame(ArrayMix(cards));
-        }
-    }
-
-    ready(function() {
-        var cards = [ "green", "red", "purple", "blue"];
-        var generatedColorIndex = "";
-        playGame(cards);
-        _('.startGameButton').on('click', function(){
-            playGame(ArrayMix(cards));
-        });
-    });
- })(window);
+})(window);
